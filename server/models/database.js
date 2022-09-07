@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 mongooose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedToplogy: true,
+  db: FOODBLOG,
 });
 
 const db = mongoose.connection;
