@@ -1,17 +1,22 @@
 const mongoose = require("mongoose");
 
-mongooose.connect(process.env.MONGODB_URI, {
+const DB = process.env.DATABASE.replace(
+  "<password>",
+  process.env.DATABASE_PASSWORD
+);
+
+mongoose.connect(DB, {
   useNewUrlParser: true,
-  useUnifiedToplogy: true,
-  db: FOODBLOG,
+  useUnifiedTopology: true,
+  dbName: "Blogfood",
 });
 
 const db = mongoose.connection;
-
-db.on("error", console.error.bind(console, "connecton error;"));
+db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {
-  console.log("Connection Successfull");
+  console.log("Connected");
 });
 
-//Models
+// Models
 require("./Category");
+require("./Recipe");
