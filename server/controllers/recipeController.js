@@ -10,7 +10,9 @@ exports.homepage = async (err, res, req) => {
   try {
     const limit = 5;
     const categories = await Category.find().limit(limit);
-    res.render("index", { title: "Cooking Blog - Home", categories });
+    const lastestRecipe = await Recipe.find({}).sort({ _id: -1 }).limit(limit);
+    const food = { lastestRecipe };
+    res.render("index", { title: "Cooking Blog - Home", categories, food });
   } catch (error) {
     res.status(500).send({ message: error.message || "Error Occured" });
   }
