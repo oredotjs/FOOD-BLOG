@@ -11,7 +11,10 @@ exports.homepage = async (err, res, req) => {
     const limit = 5;
     const categories = await Category.find().limit(limit);
     const lastestRecipe = await Recipe.find({}).sort({ _id: -1 }).limit(limit);
-    const food = { lastestRecipe };
+    const american = await Recipe.find({ category: "American" }).limit(limit);
+    const thai = await Recipe.find({ category: "Thai" }).limit(limit);
+    const chinese = await Recipe.find({ category: "Chinese" }).limit(limit);
+    const food = { lastestRecipe, american, thai, chinese };
     res.render("index", { title: "Cooking Blog - Home", categories, food });
   } catch (error) {
     res.status(500).send({ message: error.message || "Error Occured" });
