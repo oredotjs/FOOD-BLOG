@@ -1,0 +1,23 @@
+<% if(recipe != '') {%>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+      <%- recipe.name %>
+    </li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-12 col-md-4">
+    <img
+      src="/uploads/<%- recipe.image -%>"
+      alt="<%- recipe.name %>"
+      class="img-fluid sticky-top"
+      style="top: 20px"
+    />
+  </div>
+</div>
+
+<% }%>
