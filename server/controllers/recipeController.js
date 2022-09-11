@@ -46,6 +46,21 @@ exports.exploreRecipe = async (req, res, next) => {
   }
 };
 
+exports.exploreCategoryById = async (req, res, next) => {
+  try {
+    limit = 20;
+    let categoryId = req.params.id;
+    const categoryById = await Recipe.find({ category: categoryId }).limit(
+      limit
+    );
+    res.render("categories", {
+      title: "Cooking Blog - Category",
+      categoryById,
+    });
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" });
+  }
+};
 // async function insertDummyData() {
 //   try {
 //     await Recipe.insertMany([
