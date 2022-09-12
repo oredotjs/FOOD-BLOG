@@ -61,6 +61,21 @@ exports.exploreCategoryById = async (req, res, next) => {
     res.status(500).send({ message: error.message || "Error Occured" });
   }
 };
+
+exports.searchRecipe = async (req, res, next) => {
+  try {
+    const searchText = req.body.searchText;
+    const searchRecipe = await Recipe.find({
+      $text: { $search: searchText, $diacriticSensitive: true },
+    });
+    res.render("search", {
+      title: "Cooking Blog - Category",
+      searchRecipe,
+    });
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Error Occured" });
+  }
+};
 // async function insertDummyData() {
 //   try {
 //     await Recipe.insertMany([
